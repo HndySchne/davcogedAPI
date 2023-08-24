@@ -27,9 +27,7 @@ router.get('/:id', productsMethods.getOneproduct);
 
 // // suppression d'une sauce
 // router.delete('/:id', auth, multer, sauceMethods.deleteOneSauce);
-
-// // mise à jour des likes 
-// router.post('/:id/like', auth, sauceMethods.updateLikes);
+router.delete('/:id', multer, productsMethods.deleteOneProduct);
 
 // export du module pour app.js 
 module.exports = router;  
