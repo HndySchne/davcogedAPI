@@ -24,6 +24,7 @@ router.get('/:id', productsMethods.getOneproduct);
 
 // // modification d'une sauce
 // router.put('/:id', auth, multer, sauceMethods.modifyOneSauce);
+router.put('/:id', multer, productsMethods.modifyOneProduct);
 
 // // suppression d'une sauce
 // router.delete('/:id', auth, multer, sauceMethods.deleteOneSauce);
