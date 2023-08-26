@@ -5,6 +5,7 @@ const Product = require('../models/products');
 const jwt = require('jsonwebtoken');
 // permet de manipuler des fichiers 
 const fs = require('fs');
+const { log } = require('console');
 
 // CREATION DU PRODUIT 
 exports.productCreating = (req, res, next) => {
@@ -50,40 +51,45 @@ exports.getOneproduct = (req, res, next) => {
 
 // MODIFIER UN PRODUIT
 exports.modifyOneProduct = (req, res, next) => {
+    console.log('============================================================== début modification =========== ');
     // création de l'objet sauce qui va permettre de mettre à jour la base de donnée 
     // si on a une image en entrée 
+    console.log('BODY MODIF :', req.body);
+    console.log('FILE MODIF :', req.file);
     const productObject = req.file ? {
-        ...JSON.parse(req.body.sauce),
-        Url: `${req.protocol}://${req.get('host')}/file/${req.file.filename}`
+        ...req.body,
+        url: `${req.protocol}://${req.get('host')}/file/${req.file.filename}`
     } : { ...req.body };
     // suppression du userId pour utiliser celui du auth (cybersecu)
     // delete productObject._userId;
 
     // on cherche l'id de l'item
     Product.findOne({ _id: req.params.id })
-        .then((sauce) => {
+        .then((product) => {
             // test pour vérifier l'id du user 
             // if (sauce.userId != req.auth.userId) {
             //     res.status(401).json({ message: 'Not authorized' });
             // } else {
                 // Est ce qu'on a Url en entrée dans l'objet ???
-                if (sauceObject.imageUrl != null){
+                console.log('productObject.url', productObject.url); 
+                if (productObject.url != null){
                 // suppression de l'image dans l'API si on a une image en entrée  
-                const filename = sauce.imageUrl.split('/file/')[1];
+                const filename = product.url.split('/file/')[1];
+                console.log('filename :', filename);
                 fs.unlink(`file/${filename}`, () => {
                 // si le test est ok ==> mise à jour de la base de donnée 
-                Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                Product.updateOne({ _id: req.params.id }, { ...productObject, _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Objet modifié!' }))
                     .catch(error => res.status(401).json({ error }));
                 });
                 } else {
                     // si pas d'image en entrée alors on modifie la sauce et on supprime pas l'image dans 
                     // l'API
-                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                    Product.updateOne({ _id: req.params.id }, { ...productObject, _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Objet modifié!' }))
                     .catch(error => res.status(401).json({ error }));
                 }
-
+                console.log('============================================================== fin modification =========== ');
             // }
         })
         .catch((error) => {
