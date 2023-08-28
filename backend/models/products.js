@@ -9,7 +9,7 @@ const productItem = mongoose.Schema({
     currency: { type: String, required: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
-    subcategory: { type: String, required: true }, 
+    subcategory: { type: String }, 
     url: { type: String, required: true }
   });
 

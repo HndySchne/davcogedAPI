@@ -5,7 +5,6 @@ const Product = require('../models/products');
 const jwt = require('jsonwebtoken');
 // permet de manipuler des fichiers 
 const fs = require('fs');
-const { log } = require('console');
 
 // CREATION DU PRODUIT 
 exports.productCreating = (req, res, next) => {
@@ -73,6 +72,7 @@ exports.modifyOneProduct = (req, res, next) => {
                 // Est ce qu'on a Url en entrée dans l'objet ???
                 console.log('productObject.url', productObject.url); 
                 if (productObject.url != null){
+                console.log('avec un objet !!');
                 // suppression de l'image dans l'API si on a une image en entrée  
                 const filename = product.url.split('/file/')[1];
                 console.log('filename :', filename);

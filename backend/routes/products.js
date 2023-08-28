@@ -1,8 +1,6 @@
 const express = require('express');
 // objet router qui permet de router avec les controllers 
 const router = express.Router(); 
-// const multer = require('multer');
-// const upload = multer({ dest: 'files/' });
 
 // importation des règles métiers 
 const productsMethods = require('../controllers/products'); 
@@ -11,7 +9,6 @@ const multer = require('../middleware/multer-config');
 
 // Création d'un produit avec la méthode POST 
 // router.post('/', auth, multer, productsMethods.productCreating);
-// router.post('/', upload.any(), productsMethods.productCreating);
 router.post('/', multer, productsMethods.productCreating);
 
 // récupération de toutes les sauces 

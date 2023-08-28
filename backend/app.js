@@ -18,6 +18,7 @@ app.use('/file', express.static(path.join(__dirname, 'file')));
 // route des users 
 // const userRoutes = require('./routes/user');
 const productsRoutes = require('./routes/products');
+const messagesRoutes = require('./routes/messages');
 
 // connexion à mongo DB (avec l'objet sécurisé DB_URL)
 mongoose.connect(process.env.DB_URL,
@@ -28,33 +29,12 @@ mongoose.connect(process.env.DB_URL,
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-
 // pour éviter les erreurs cors on permet le cross origin 
 app.use(cors());
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//   next();
-// });
 
 // app.use('/api/auth', userRoutes);
 app.use('/api/products', productsRoutes);
+app.use('/api/messages', messagesRoutes);
 
 // on permet au fichier server d'accèder à app.js 
 module.exports = app; 
-
-
-// const express = require('express');
-
-// // const app = express();
-
-// // app.post('/api/products', , function(req, res) {
-//   app.post('/api/products', function(req, res) {
-
-//    console.log(req.body); // Text input
-//    console.log(req.files); // Metadata about uploaded files (if any)
-
-// });
-
-// module.exports = app; 
