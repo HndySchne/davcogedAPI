@@ -8,8 +8,6 @@ const fs = require('fs');
 
 // CREATION D'UN EMAIL
 exports.messageCreating = (req, res, next) => {
-    console.log('dans la fonction de création du message utilisateur : ');
-    console.log(req.body);
     const product = Message({...req.body});
     // enregistrement de la sauce, si il y a une erreur on positionnne une erreur 400
     product.save()
@@ -19,12 +17,9 @@ exports.messageCreating = (req, res, next) => {
 
 // RÉCUPÉRER TOUS LES EMAIL / MESSAGES
 exports.getAllMessages = (req, res, next) => {
-    console.log('================================== Récupérer tout les messages ==========================================');
     Message.find()
         .then((messages) => {
-            console.log(messages);
             res.status(200).json(messages);
-            console.log('================================== FIN LECTURE ==========================================');
         })
         .catch(error => res.status(400).json({ error }));
 }

@@ -4,28 +4,23 @@ const router = express.Router();
 
 // importation des règles métiers 
 const productsMethods = require('../controllers/products'); 
-// const auth = require('../middleware/auth'); 
+const auth = require('../middleware/auth'); 
 const multer = require('../middleware/multer-config'); 
 
 // Création d'un produit avec la méthode POST 
-// router.post('/', auth, multer, productsMethods.productCreating);
-router.post('/', multer, productsMethods.productCreating);
+router.post('/', auth, multer, productsMethods.productCreating);
 
-// récupération de toutes les sauces 
-// router.get('/', auth, productsMethods.getAllproduct);
+// récupération de toutes les produits 
 router.get('/', productsMethods.getAllproduct);
 
-// récupération d'une sauce
-// router.get('/:id', auth, productsMethods.getOneSauce);
+// récupération d'un produit 
 router.get('/:id', productsMethods.getOneproduct);
 
-// // modification d'une sauce
-// router.put('/:id', auth, multer, sauceMethods.modifyOneSauce);
-router.put('/:id', multer, productsMethods.modifyOneProduct);
+// modification d'un produit 
+router.put('/:id', auth, multer, productsMethods.modifyOneProduct);
 
-// // suppression d'une sauce
-// router.delete('/:id', auth, multer, sauceMethods.deleteOneSauce);
-router.delete('/:id', multer, productsMethods.deleteOneProduct);
+// suppression d'un produit 
+router.delete('/:id', auth, multer, productsMethods.deleteOneProduct);
 
 // export du module pour app.js 
 module.exports = router;  

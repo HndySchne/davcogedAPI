@@ -4,9 +4,10 @@ const router = express.Router();
 
 // importation des règles métiers 
 const  messagesMethods = require('../controllers/messages'); 
+const multer = require('../middleware/multer-config'); 
 
 // Création d'un message avec la méthode POST 
-router.post('/', messagesMethods.messageCreating);
+router.post('/', multer, messagesMethods.messageCreating);
 
 // récupération de toutes les messages
 router.get('/', messagesMethods.getAllMessages);
