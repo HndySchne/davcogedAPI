@@ -1,10 +1,5 @@
 // importation de l'objet user du model
-// const bcrypt = require('bcrypt');
 const Message = require('../models/messages');
-// import de jsonwebtoken pour créer des tokens (sécurité)
-const jwt = require('jsonwebtoken');
-// permet de manipuler des fichiers 
-const fs = require('fs');
 
 // CREATION D'UN EMAIL
 exports.messageCreating = (req, res, next) => {
@@ -29,7 +24,6 @@ exports.getOneMessage = (req, res, next) => {
     // params.id ==> id dans l'URL 
     Message.findOne({ _id: req.params.id })
         .then((messages) => {
-            console.log(messages);
             res.status(200).json(messages)
         })
         .catch(error => res.status(400).json({ error }));

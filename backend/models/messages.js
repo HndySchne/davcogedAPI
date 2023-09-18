@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 // Schéma de donnée Utilisateur 
 const messageContact = mongoose.Schema({
-    // title:{ type: String, required: true}, 
+    title:{ type: String }, 
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },

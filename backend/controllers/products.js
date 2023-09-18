@@ -1,7 +1,5 @@
 // importation de l'objet user du model
 const Product = require('../models/products');
-// import de jsonwebtoken pour créer des tokens (sécurité)
-const jwt = require('jsonwebtoken');
 // permet de manipuler des fichiers 
 const fs = require('fs');
 
